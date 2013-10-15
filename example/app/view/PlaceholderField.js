@@ -8,7 +8,7 @@ Ext.define('FormExample.view.PlaceholderField', {
     extend                   : 'Ext.field.Text',
     xtype                    : 'placeholderfield',
     config                   : {
-        cls            : 'x-placeholder-field',
+        cls                : 'x-placeholder-field',
         placeHolderTpl     : ''.concat(
             '<div class="placeholder">{placeHolder}</div>'
         ),
@@ -25,22 +25,26 @@ Ext.define('FormExample.view.PlaceholderField', {
         });
 
     },
+    applyPlaceHolderTpl      : function (config) {
+        if (typeof config === "string") {
+            return Ext.create('Ext.Template', config, { compiled : true});
+        }
+    },
     onKeyUp                  : function (e) {
-        var me = this,
-            placeHolder = me.getPlaceHolder(),
+        var me            = this,
+            placeHolder   = me.getPlaceHolder(),
             placeHolderEl = me.getPlaceHolderElement(),
             inputEl,
-            placeHolderFragment,
             applyClassFn;
 
         if (placeHolder && !placeHolderEl) {
-            inputEl = me.element.down('.x-field-input')
-            placeHolderFragment = new Ext.Template(me.getPlaceHolderTpl()).apply({
-                placeHolder : placeHolder
-            });
-            placeHolderEl = inputEl.insertHtml('beforeBegin', placeHolderFragment, true);
+            inputEl = me.element.down('.x-field-input');
 
-            applyClassFn = function() {
+            placeHolderEl = inputEl.insertHtml('beforeBegin', me.getPlaceHolderTpl().apply({
+                placeHolder : placeHolder
+            }), true);
+
+            applyClassFn = function () {
                 placeHolderEl.addCls('added');
             };
             window.requestAnimationFrame(applyClassFn);
@@ -55,6 +59,7 @@ Ext.define('FormExample.view.PlaceholderField', {
     onClearIconTap           : function () {
         var me = this,
             placeHolderEl = me.getPlaceHolderElement();
+        
         placeHolderEl && me.removePlaceHolderElement();
         me.callParent();
     },
