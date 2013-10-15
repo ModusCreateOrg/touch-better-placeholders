@@ -8,3 +8,29 @@
 
 // Examples of using the icon mixin:
 // @include icon('user');
+
+.x-placeholder-field {
+  position: relative;
+  .x-field-input {
+    position: relative;
+  }
+  /* larger top padding */
+  .x-form-field {
+    padding: 1em .4em .4em .4em;
+  }
+  .placeholder {
+    @include transition(all .25s ease);
+    opacity: 0;
+    position: absolute;
+    top: .75em;
+    font-size: 11px;
+    color: $base-color;
+    z-index: 20;
+    font-weight: bold;
+    left: .4em;
+    &.added {
+      opacity: 1;
+      top: .3em;
+    }
+  }
+}

@@ -16,6 +16,14 @@ Ext.define('FormExample.view.Main', {
                     {
                         xtype       : 'placeholderfield',
                         placeHolder : 'foobar'
+                    },
+                    {
+                        xtype       : 'placeholderfield',
+                        placeHolder : 'First Name'
+                    },
+                    {
+                        xtype       : 'placeholderfield',
+                        placeHolder : 'Last Name'
                     }
                 ]
             }

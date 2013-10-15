@@ -8,6 +8,7 @@ Ext.define('FormExample.view.PlaceholderField', {
     extend                   : 'Ext.field.Text',
     xtype                    : 'placeholderfield',
     config                   : {
+        cls            : 'x-placeholder-field',
         placeHolderTpl     : ''.concat(
             '<div class="placeholder">{placeHolder}</div>'
         ),
@@ -37,6 +38,9 @@ Ext.define('FormExample.view.PlaceholderField', {
                 placeHolder : placeHolder
             });
             placeHolderEl = inputEl.insertHtml('beforeBegin', placeHolderFragment, true);
+            setTimeout(function() {
+                placeHolderEl.addCls('added');
+            }, 1);
             me.setPlaceHolderElement(placeHolderEl);
         } else if (placeHolderEl && !me.getValue()) {
             me.removePlaceHolderElement();
