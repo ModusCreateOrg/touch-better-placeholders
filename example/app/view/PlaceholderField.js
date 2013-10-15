@@ -30,7 +30,8 @@ Ext.define('FormExample.view.PlaceholderField', {
             placeHolder = me.getPlaceHolder(),
             placeHolderEl = me.getPlaceHolderElement(),
             inputEl,
-            placeHolderFragment;
+            placeHolderFragment,
+            applyClassFn;
 
         if (placeHolder && !placeHolderEl) {
             inputEl = me.element.down('.x-field-input')
@@ -38,9 +39,12 @@ Ext.define('FormExample.view.PlaceholderField', {
                 placeHolder : placeHolder
             });
             placeHolderEl = inputEl.insertHtml('beforeBegin', placeHolderFragment, true);
-            setTimeout(function() {
+
+            applyClassFn = function() {
                 placeHolderEl.addCls('added');
-            }, 1);
+            };
+            window.requestAnimationFrame(applyClassFn);
+
             me.setPlaceHolderElement(placeHolderEl);
         } else if (placeHolderEl && !me.getValue()) {
             me.removePlaceHolderElement();
