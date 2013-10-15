@@ -1,10 +1,10 @@
 Ext.define('FormExample.view.Main', {
     extend   : 'Ext.form.Panel',
     requires : [
+        'Ext.form.FieldSet',
         'FormExample.view.PlaceholderField'
     ],
     config   : {
-
         items : [
             {
                 xtype : 'fieldset',
